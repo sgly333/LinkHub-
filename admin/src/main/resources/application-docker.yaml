@@ -1,0 +1,15 @@
+# Docker（shortlink-net）：与 docker-compose.runtime.yml / docker-compose.infra.yml 配套
+# 需同时设置 DATABASE_ENV=docker、SPRING_PROFILES_ACTIVE=docker
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    redis:
+      host: redis
+      port: 6379
+      password: "${SPRING_DATA_REDIS_PASSWORD:123456}"
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos:8848

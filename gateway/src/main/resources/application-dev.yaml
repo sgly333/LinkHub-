@@ -1,0 +1,25 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: short-link-admin
+          uri: lb://short-link-admin/api/short-link/admin/**
+          # predicates：路由的匹配条件
+          # uri：匹配到了以后要转发到哪里
+          # lb: 代表使用负载均衡
+          # lb://short-link-admin  代表要去注册中心找 short-link-admin 的路由地址
+          predicates:
+            - Path=/api/short-link/admin/**
+          filters: # 使用过滤器进行过滤之后再转发
+            - name: TokenValidate
+              args:
+                whitePathList:
+                  - /api/short-link/admin/v1/user/login
+                  - /api/short-link/admin/v1/user/has-username
+
+        - id: short-link-project
+          uri: lb://short-link-project/api/short-link/**
+          predicates:
+            - Path=/api/short-link/**
+          filters:
+            - name: TokenValidate

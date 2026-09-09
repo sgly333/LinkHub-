@@ -1,0 +1,100 @@
+# =========================
+# Java
+# =========================
+*.class
+*.log
+
+# =========================
+# Maven
+# =========================
+target/
+**/target/
+# Maven wrapper JAR is normally kept
+# Do NOT ignore mvnw / mvnw.cmd / .mvn/
+
+# =========================
+# Gradle
+# =========================
+.gradle/
+build/
+
+# Keep Gradle Wrapper
+!gradle/wrapper/gradle-wrapper.jar
+
+# =========================
+# IntelliJ IDEA
+# =========================
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# =========================
+# Eclipse
+# =========================
+.classpath
+.project
+.settings/
+bin/
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+*.key
+*.pem
+
+# Local-only configuration
+application-local.yml
+application-local.yaml
+application-local.properties
+
+#cursor
+.cursor/
+
+#claude
+.claude/
+
+#docker
+.dockerignore
+docker/
+
+#aggregation
+aggregation/
+
+#format
+format/
+
+#other
+CLAUDE.md
+LICENSE
+lombok.config
+README.md
+short-urls.csv
+短链接.jmx
+.windsurfrules
+.git_origin
+docker/

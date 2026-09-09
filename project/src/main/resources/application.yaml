@@ -1,0 +1,55 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: short-link-project
+  datasource:
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+    url: jdbc:shardingsphere:classpath:shardingsphere-config-${database.env:dev}.yaml
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: 123456
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
+#  记录nacos服务器的地址
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+short-link:
+  domain:
+    default: nurl.ink:8001
+  cache:
+    # 跳转缓存 Redis 删除失败后的重试任务间隔（毫秒）
+    goto-delete-retry-interval-ms: 30000
+    # 定时任务中连续删除失败达到此次数后丢弃该条（防止无限堆积）
+    goto-delete-retry-max-attempts: 3
+  favicon:
+    default: /favicon.ico
+  stats:
+    flush:
+      interval-ms: 5000
+  goto-domain:
+    white-list:
+      enable: false
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+
+
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    group: short-link_project-service_stats-save_pg
+    topic: short-link_project-service_topic
+    send-message-timeout: 2000
+    retry-times-when-send-failed: 1
+    retry-times-when-send-async-failed: 1
+  consumer:
+    group: short-link_project-service_stats-save_cg

@@ -1,0 +1,23 @@
+# Docker（shortlink-net）：与 docker-compose.runtime.yml / docker-compose.infra.yml 配套
+# 需同时设置 DATABASE_ENV=docker、SPRING_PROFILES_ACTIVE=docker
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    redis:
+      host: redis
+      port: 6379
+      password: "${SPRING_DATA_REDIS_PASSWORD:123456}"
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos:8848
+
+rocketmq:
+  name-server: rocketmq-namesrv:9876
+
+short-link:
+  domain:
+    # 生产部署请改为你自己的可访问域名（不带协议），避免默认 nurl.ink 导致无法跳转
+    default: "${SHORT_LINK_DOMAIN_DEFAULT:101.37.160.82:8001}"

@@ -1,0 +1,64 @@
+dataSources:
+  ds_0:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/link?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+
+rules:
+  - !SHARDING
+    tables:
+      t_link:
+        actualDataNodes: ds_0.t_link_${0..15}
+        tableStrategy:
+          standard:
+            shardingColumn: gid
+            shardingAlgorithmName: link_table_hash_mod
+      t_link_goto:
+        actualDataNodes: ds_0.t_link_goto_${0..15}
+        tableStrategy:
+          standard:
+            shardingColumn: full_short_url
+            shardingAlgorithmName: link_goto_table_hash_mod
+      t_group:
+        actualDataNodes: ds_0.t_group_${0..15}
+        tableStrategy:
+          standard:
+            shardingColumn: username
+            shardingAlgorithmName: group_table_hash_mod
+    shardingAlgorithms:
+      link_table_hash_mod:
+        type: HASH_MOD
+        props:
+          sharding-count: 16
+      link_goto_table_hash_mod:
+        type: HASH_MOD
+        props:
+          sharding-count: 16
+      group_table_hash_mod:
+        type: HASH_MOD
+        props:
+          sharding-count: 16
+props:
+  sql-show: false
+
+# 表：t_link
+#作用：存储短链接核心信息（如原始URL、分组信息、状态等）
+#按什么进行分表：基于 gid（分组ID）进行 HASH 取模分表（16张表）
+
+# 表：t_link_goto
+#作用： 存储短链接和其对应分组
+#按什么进行分表：基于 full_short_url（完整短链接）进行 HASH 取模分表（16张表）
+#
+# 表：t_group
+#作用：存储用户分组信息（短链分组/业务分组）
+#按什么进行分表：基于 username 进行 HASH 取模分表（16张表）
+
+# 表：t_user
+#作用：用户信息表
+#分表策略：基于 username 作为分片键，通过 HASH_MOD 算法均匀分布到 16 个分表
+#
+#表：t_group
+#作用：用户分组信息表
+#分表策略：基于 username 作为分片键，通过 HASH_MOD 算法进行分表，保证数据均匀性与查询单点命中

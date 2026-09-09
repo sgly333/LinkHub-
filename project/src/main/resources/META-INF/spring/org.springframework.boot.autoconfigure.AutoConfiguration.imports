@@ -1,0 +1,3 @@
+# RocketMQ 2.2.3 version does not adapt to SpringBoot3
+org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration
+# 让 Spring Boot 3 能加载 RocketMQ 的自动配置，因为 RocketMQ 2.2.3 还没有适配新的自动配置机制。

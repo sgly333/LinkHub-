@@ -1,0 +1,15 @@
+# Docker（shortlink-net）：与 docker-compose.runtime.yml 配套
+# 与 dev 同时使用：SPRING_PROFILES_ACTIVE=dev,docker（保留 application-dev.yaml 路由，仅覆盖 Redis/Nacos）
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    redis:
+      host: redis
+      port: 6379
+      password: "${SPRING_DATA_REDIS_PASSWORD:123456}"
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos:8848
