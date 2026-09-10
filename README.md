@@ -6,7 +6,7 @@ LinkHub 是一个基于 Spring Cloud Alibaba 构建的高并发短链接平台�
 
 ## 技术栈
 
-**Spring Boot / Spring Cloud Alibaba / Redis / Caffeine / RocketMQ / ShardingSphere / MySQL / Redisson / Sentinel **
+**Spring Boot / Spring Cloud Alibaba / Redis / Caffeine / RocketMQ / ShardingSphere / MySQL / Redisson / Sentinel**
 
 ## 核心设计
 
@@ -35,29 +35,24 @@ LinkHub
 ├── admin          # 后台管理服务
 ├── gateway        # 网关服务
 ├── project        # 短链接核心服务
-├── console-vue    # Web 管理端
-└── resources      # 数据库等资源
+├── console-vue    # WEB 管理端
+└── resources      # sql脚本
 ```
 
 ## 性能测试
 
 短链接跳转接口压测结果：
 
-* 平均 RT：**16 ms**
-* P95：**24 ms**
-* QPS：**12.4K**
+* 平均 RT：**18 ms**
+* P95：**26 ms**
+* QPS：**13.2K**
 
 访问统计链路可稳定支撑 **10K+ QPS** 场景下的异步处理。
 
-> 压测结果与测试机器、并发参数及数据规模有关。
 
 ### 压测截图
 
-<!-- 后续将压测截图放在这里 -->
-
-```markdown
-![benchmark](docs/images/benchmark.png)
-```
+![压测截图](image.png)
 
 ## License
 
