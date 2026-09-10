@@ -54,6 +54,3 @@ LinkHub
 
 ![压测截图](image.png)
 
-## License
-
-本项目仅用于学习与技术交流。
